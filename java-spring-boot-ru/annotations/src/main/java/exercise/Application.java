@@ -12,7 +12,7 @@ public class Application {
         // BEGIN
         Arrays.stream(address.getClass().getMethods())
                 .filter(method -> method.isAnnotationPresent(Inspect.class))
-                .forEach(method -> System.out.println(String.format("Method %s returns a value of a type %s", method.getName(), method.getReturnType())));
+                .forEach(method -> System.out.println(String.format("Method %s returns a value of type %s", method.getName(), method.getReturnType())));
         // END
     }
 }
