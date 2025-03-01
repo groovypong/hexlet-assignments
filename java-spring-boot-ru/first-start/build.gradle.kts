@@ -11,12 +11,6 @@ plugins {
     id("com.github.ben-manes.versions") version "0.48.0"
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
-
 group = "exercise"
 
 version = "1.0-SNAPSHOT"
