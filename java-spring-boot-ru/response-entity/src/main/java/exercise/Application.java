@@ -53,17 +53,18 @@ public class Application {
         Optional<Post> requestedPost = posts.stream()
                 .filter(post -> post.getId().equals(id))
                 .findFirst();
+        boolean exists = requestedPost.isPresent();
 
-        if (requestedPost.isPresent()) {
+        if (exists) {
             Post updatedPost = requestedPost.get();
             updatedPost.setTitle(data.getTitle());
             updatedPost.setBody(data.getBody());
             updatedPost.setId(data.getId());
-
-            return ResponseEntity.ok(updatedPost);
         }
 
-        return ResponseEntity.noContent().build();
+        return exists
+                ? ResponseEntity.ok(data)
+                : ResponseEntity.noContent().build();
     }
     // END
 
