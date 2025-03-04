@@ -23,23 +23,19 @@ public class PostsController {
 
     @GetMapping("/users/{id}/posts")
     @ResponseStatus(HttpStatus.OK)
-    public List<Post> index(@PathVariable int id) {
+    public List<Post> index(@PathVariable Integer id) {
         return posts.stream()
                 .filter(post -> post.getUserId() == id)
                 .toList();
     }
 
     @PostMapping("/users/{id}/posts")
-    public ResponseEntity<Post> create(@PathVariable int id, @RequestBody Post data) {
-        Post newPost = new Post();
-        newPost.setBody(data.getBody());
-        newPost.setSlug(data.getSlug());
-        newPost.setTitle(data.getTitle());
-        newPost.setUserId(id);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Post create(@PathVariable Integer id, @RequestBody Post post) {
+        post.setUserId(id);
+        posts.add(post);
 
-        posts.add(newPost);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(newPost);
+        return post;
     }
 }
 // END
